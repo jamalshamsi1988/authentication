@@ -1,5 +1,4 @@
 
-import User from '../../../models/model';
 import { hashPassword } from '../../../util/auth';
 import connectDB from '../../../util/connectDB';
 import User from '../../../models/model';

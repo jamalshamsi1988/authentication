@@ -1,10 +1,12 @@
+import { Link } from 'next/link';
 
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+ function Home() {
   return (
     <div className={styles.container}>
-    <h1>Authentication</h1>
+      <button><Link href="/signup">Sign up</Link></button>
     </div>
   )
 }
+export default Home;

@@ -1,4 +1,5 @@
 import User from "../../../models/model";
+import { verifyPassword } from "../../../util/auth";
 import connectDB from "../../../util/connectDB";
 
 async function handler(req,res){
@@ -21,7 +22,14 @@ async function handler(req,res){
         }
 
         const user = await User.findOne({email : email});
-        res.status(422).json({status:"failed" , message:"User dosen't Exist!"});
+        if(!user){
+            return res.status(404).json({status:"failed" , message:"User dosen't Exist!"});
+        }
+        
+        const isValid = await verifyPassword(password , user.password);
+        if(!isValid){
+            return res.status(422).json({status:"failed" , message:"Username or Password is incorrect"});
+        }
     
 }
 

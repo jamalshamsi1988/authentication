@@ -2,6 +2,7 @@ import { sign } from "jsonwebtoken";
 import User from "../../../models/model";
 import { verifyPassword } from "../../../util/auth";
 import connectDB from "../../../util/connectDB";
+import { serialize } from "cookie";
 
 async function handler(req,res){
     if(req.method !== "POST"){
@@ -20,6 +21,7 @@ async function handler(req,res){
         const {email,password}=req.body;
         const secretKey = process.env.SECRET_KEY;
         const expiration = 24 * 60 * 60; //HH-MM-SEC
+        const serialized = serialize("token" , token , {httpOnly : true , maxAge : expiration , path:"/"});
 
 
         if(!email || !password){
@@ -37,6 +39,11 @@ async function handler(req,res){
         }
 
         const token =sign({email},secretKey,{expiresIn : expiration });
+        res.status(200).setHeader("Set-Cookie" , serialized).json({
+            status: "success",
+            message :"User Logged in!",
+            data : {email : user.email},
+        })
         
     
 }

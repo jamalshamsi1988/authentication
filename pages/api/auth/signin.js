@@ -14,14 +14,14 @@ async function handler(req,res){
     }catch(error){
         console.log(error)
         return res.status(500).json({
-               status:failed,
+               status:"failed",
                message : "Failed to connected to DB"});
         }
 
         const {email,password}=req.body;
         const secretKey = process.env.SECRET_KEY;
         const expiration = 24 * 60 * 60; //HH-MM-SEC
-        const serialized = serialize("token" , token , {httpOnly : true , maxAge : expiration , path:"/"});
+       
 
 
         if(!email || !password){
@@ -39,6 +39,7 @@ async function handler(req,res){
         }
 
         const token =sign({email},secretKey,{expiresIn : expiration });
+        const serialized = serialize("token" , token , {httpOnly : true , maxAge : expiration , path:"/"});
         res.status(200).setHeader("Set-Cookie" , serialized).json({
             status: "success",
             message :"User Logged in!",

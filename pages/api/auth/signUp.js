@@ -1,4 +1,3 @@
-n
 import { hashPassword } from '../../../util/auth';
 import connectDB from '../../../util/connectDB';
 import User from '../../../models/model';
@@ -14,7 +13,7 @@ async function handler(req,res){
     }catch(error){
         console.log(error)
      return res.status(500).json({
-            status:failed,
+            status:"failed",
             message : "Failed to connected to DB"
          });
     }

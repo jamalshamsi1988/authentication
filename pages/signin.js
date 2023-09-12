@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 
 function SignIn(){
     const [email , setEmail]=useState("");
     const [password , setPassword]=useState("");
+    const router = useRouter()
 
     const signInHandler= async () =>{
         const res = await fetch("/api/auth/signin" , {
@@ -12,6 +14,8 @@ function SignIn(){
             headers: {'Content-type': 'application/json'},
         });
         const data = await res.json();
+
+        if(data.status === "success") router.push("/dashbord")
         console.log(data)
     }
 

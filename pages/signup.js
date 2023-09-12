@@ -5,7 +5,7 @@ import { useState } from "react";
 function SignUp(){
     const [email , setEmail]=useState("");
     const [password , setPassword]=useState("");
-    const router = useRouter()
+    const router = useRouter();
 
     const signupHandler= async () =>{
         const res = await fetch("/api/auth/signup" , {
@@ -15,7 +15,7 @@ function SignUp(){
         });
         const data = await res.json();
         
-        if(data.status === "success") router.push("/signup");
+        if(data.status === "success") router.push("/")
         console.log(data)
     }
 

@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
-import { verifyToken } from "../../../util/auth";
+import { verifyToken } from "../../util/auth";
 
 async function handler(req,res){
 

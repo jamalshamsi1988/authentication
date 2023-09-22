@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
   const [isLogedIn , setIsLogedIn]=useState(false);
 
   useEffect(()=>{
-    fetch("/api/user").then(res => res.json()).then(data =>{
-      if(res.status === "success") setIsLogedIn(true);
+    fetch("/api/user").then((res) => res.json()).then((data) =>{
+      if(data.status === "success") setIsLogedIn(true);
     })
   },[])
 
